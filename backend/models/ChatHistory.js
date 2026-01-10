@@ -8,7 +8,7 @@ const chatHistorySchema = new mongoose.Schema(
       required: true,
     },
     documentId: {
-      type: mongoose.SchemaType.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Document",
       required: true,
     },
@@ -42,6 +42,6 @@ const chatHistorySchema = new mongoose.Schema(
 // Index for faster queries
 chatHistorySchema.index({userId: 1, documentId: 1});
 
-const chatHistory = mongoose.model("ChatHistory", chatHistorySchema);
+const ChatHistory = mongoose.model("ChatHistory", chatHistorySchema);
 
-export default chatHistory;
+export default ChatHistory;

@@ -45,7 +45,7 @@ const documentSchema = new mongoose.Schema(
       },
     ],
     uploadDate: {
-      type: Data,
+      type: Date,
       default: Date.now(),
     },
     lastAccessed: {
