@@ -80,12 +80,14 @@ export const login = async (req, res, next) => {
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
+      console.log(user)
       return res.status(401).json({
         success: false,
         error: "Invalid Credentials",
         statusCode: 401,
       });
     }
+      console.log(user, "11")
 
     // Check password
     const isMatch = await user.matchPassword(password);
