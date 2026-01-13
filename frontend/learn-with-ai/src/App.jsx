@@ -12,6 +12,7 @@ import FlashcardPage from './pages/Flashcards/FlashcardPage';
 import QuizTakePage from './pages/Quizzes/QuizTakePage';
 import QuizResultPage from './pages/Quizzes/QuizResultPage';
 import ProfilePage from './pages/Profile/ProfilePage';
+import ProtectedRoute from './Components/auth/ProtectedRoute';
 
 const App = () => {
   const isAuthenticated = false;
@@ -28,7 +29,7 @@ const App = () => {
   return(
     <Router>
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Navigate to="dashboard" replace/> : <Navigate to="/login"/> } />
+        <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" replace/> : <Navigate to="/login" replace/> } />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
         
@@ -42,11 +43,7 @@ const App = () => {
           <Route path="/quizzes/:quizId" element={<QuizTakePage/>} />
           <Route path="/quizzes/:quizId/results" element={<QuizResultPage/>} />
           <Route path="/profile" element={<ProfilePage />} />
-
         </Route>
-
-
-      
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
     </Router>
