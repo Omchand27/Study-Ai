@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import AppLayout from '../layout/AppLayout';
 
 const ProtectedRoute = () => {
-    const isAuthenticated = false;
+    const isAuthenticated = true;
     const loading = false;
 
     if(loading){

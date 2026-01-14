@@ -16,6 +16,14 @@ export const register = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
 
+    if (!username || username.trim().length < 3) {
+      return res.status(400).json({
+        success: false,
+        error: "Username must be at least 3 characters long",
+        statusCode: 400,
+      });
+    }
+
     // Check if user exists
     const userExists = await User.findOne({ $or: [{ email }] });
 
@@ -52,7 +60,7 @@ export const register = async (req, res, next) => {
         },
         token,
       },
-      message: "User registered Successfully",
+      message: "User registered Successfully!",
     });
   } catch (error) {
     next(error);
@@ -80,19 +88,20 @@ export const login = async (req, res, next) => {
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      console.log(user)
+      console.log(user);
       return res.status(401).json({
         success: false,
         error: "Invalid Credentials",
         statusCode: 401,
       });
     }
-      console.log(user, "11")
+    console.log(user, "11");
 
     // Check password
     const isMatch = await user.matchPassword(password);
 
     if (!isMatch) {
+      console.log(user, "pass");
       return res.status(401).json({
         success: false,
         error: "Invalid Credentials",
@@ -112,7 +121,7 @@ export const login = async (req, res, next) => {
         profileImage: user.profileImage,
       },
       token,
-      message: "Login successful",
+      message: "Logged in successfully!",
     });
   } catch (error) {
     next(error);

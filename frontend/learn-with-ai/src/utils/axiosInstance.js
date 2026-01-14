@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      if (error.response.this.status === 500) {
+      if (error.response.status === 500) {
         console.error("Server error. Please try again later.");
       }
     } else if (error.code === "ECONNABORTED") {

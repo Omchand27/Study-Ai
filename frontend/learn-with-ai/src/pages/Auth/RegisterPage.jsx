@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import authService from "../../services/authService";
 import { toast } from "react-hot-toast";
-import { ArrowRight, BrainCircuit, Mail, Lock, User } from "lucide-react";
+import { ArrowRight, BrainCircuit, Mail, Lock, User, Eye, EyeOff } from "lucide-react";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
@@ -10,6 +10,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
 
   const navigate = useNavigate();
@@ -29,9 +30,9 @@ const RegisterPage = () => {
       toast.success("Registration Successfully! Please Login");
       navigate("/login");
     } catch (err) {
-      console.log(err)
-      setError(err.message || "Failed to Register. Please try again.");
-      toast.error(err.message || "Failed to register.");
+      console.log(err);
+      setError(err.error || "Failed to Register. Please try again.");
+      toast.error(err.error || "Failed to register.");
     } finally {
       setLoading(false);
     }
@@ -124,14 +125,29 @@ const RegisterPage = () => {
                   <Lock className="h-5 w-5" strokeWidth={2} />
                 </div>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onFocus={() => setFocusedField("password")}
                   onBlur={() => setFocusedField(null)}
                   className="w-full h-12 pl-12 pr-4 border-2 border-slate-200 rounded-xl bg-slate-50/50 text-slate-900 placeholder-slate-400 text-sm font-medium transition-all duration-200 focus:outline-none focus:border-emerald-500 focus:bg-white focus:shadow-lg focus:shadow-emerald-500/10"
-                  placeholder="......."
+                  placeholder="• • • • • • • •"
                 />
+
+                {/* Eye Toggle Button */}
+                {password.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-emerald-500 transition-colors"
+                    tabIndex={-1}>
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5" />
+                    ) : (
+                      <Eye className="h-5 w-5" />
+                    )}
+                  </button>
+                )}
               </div>
             </div>
 
@@ -153,11 +169,11 @@ const RegisterPage = () => {
                 {loading ? (
                   <>
                     <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Signing in...
+                    Creating account...
                   </>
                 ) : (
                   <>
-                    Sign up
+                    Create account
                     <ArrowRight
                       className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200"
                       strokeWidth={2.5}
@@ -165,7 +181,7 @@ const RegisterPage = () => {
                   </>
                 )}
               </span>
-              <div className="absolute inset-0 bg-linear-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
             </button>
           </div>
 
