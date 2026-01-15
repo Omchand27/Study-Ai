@@ -197,7 +197,7 @@ export const getDocument = async (req, res, next) => {
 
 export const deleteDocument = async (req, res, next) => {
   try {
-    const document = await document.findOne({
+    const document = await Document.findOne({
       _id: req.params.id,
       userId: req.user._id,
     });
