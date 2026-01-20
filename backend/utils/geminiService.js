@@ -109,7 +109,7 @@ export const generateQuiz = async (text, numQuestion = 5) => {
     const questionBlocks = generatedText.split("---").filter((q) => q.trim());
 
     for (const block of questionBlocks) {
-      const lines = card.trim().split("\n");
+      const lines = block.trim().split("\n");
       let question = "",
         options = [],
         correctAnswer = "",

@@ -30,6 +30,7 @@ const generateSummary = async (documentId) => {
     const response = await axiosInstance.post(API_PATHS.AI.GENERATE_SUMMARY, {
       documentId,
     });
+    console.log(response.data, "hello")
     return response.data?.data;
   } catch (error) {
     throw error.response?.data || { message: "Failed to generate summary" };
@@ -62,7 +63,7 @@ const explainConcept = async (documentId, concept) => {
 
 const getChatHistory = async (documentId) => {
   try {
-    const response = await axiosInstance.post(
+    const response = await axiosInstance.get(
       API_PATHS.AI.GET_CHAT_HISTORY(documentId)
     );
     return response.data;

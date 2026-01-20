@@ -6,6 +6,8 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import PageHeader from "../../Components/common/PageHeader";
 import Tabs from "../../Components/common/Tabs";
 import ChatInterface from "../../Components/chat/ChatInterface";
+import toast from "react-hot-toast";
+import AIAction from "../../Components/ai/AIAction";
 
 const DocumentDetailPage = () => {
   const { id } = useParams();
@@ -86,7 +88,7 @@ const DocumentDetailPage = () => {
   };
 
   const renderAIActions = () => {
-    return "renderAIActions";
+    return <AIAction/>;
   };
 
   const renderFlashcardsTab = () => {
