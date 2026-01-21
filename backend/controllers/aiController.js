@@ -287,7 +287,7 @@ export const explainConcept = async (req, res, next) => {
     // Generate explanation using Gemini
     const explanation = await geminiService.explainConcept(concept, context);
 
-    res.status(200).json({
+    res.status(200).json({  
       success: true,
       data: {
         concept,
