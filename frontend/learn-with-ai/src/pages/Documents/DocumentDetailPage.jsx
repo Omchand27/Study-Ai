@@ -8,6 +8,7 @@ import Tabs from "../../Components/common/Tabs";
 import ChatInterface from "../../Components/chat/ChatInterface";
 import toast from "react-hot-toast";
 import AIAction from "../../Components/ai/AIAction";
+import FlashcardManager from "../../Components/flashcards/FlashcardManager";
 
 const DocumentDetailPage = () => {
   const { id } = useParams();
@@ -84,15 +85,15 @@ const DocumentDetailPage = () => {
   };
 
   const renderChat = () => {
-    return <ChatInterface/>;
+    return <ChatInterface />;
   };
 
   const renderAIActions = () => {
-    return <AIAction/>;
+    return <AIAction />;
   };
 
   const renderFlashcardsTab = () => {
-    return "renderFlashcardsTab";
+    return <FlashcardManager documentId={id} />;
   };
 
   const renderQuizzesTab = () => {
@@ -117,13 +118,15 @@ const DocumentDetailPage = () => {
   return (
     <div className="">
       <div className="mb-4">
-        <Link to="/documents" className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors ">
+        <Link
+          to="/documents"
+          className="inline-flex items-center gap-2 text-sm text-neutral-600 hover:text-neutral-900 transition-colors ">
           <ArrowLeft size={16} />
           Back to Documents
         </Link>
       </div>
-      <PageHeader title={document.data.title}/>
-      <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab}/>
+      <PageHeader title={document.data.title} />
+      <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
     </div>
   );
 };
